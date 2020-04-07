@@ -19,3 +19,5 @@ Drakengard3Importer.exe CleanFolder ModifiedFolder DecompressedArchive.XXX
 
 - [Gildor](https://www.gildor.org/)
 - Andrew McRae
+- Canzah
+- Yoko Taro

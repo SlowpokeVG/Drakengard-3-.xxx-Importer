@@ -107,7 +107,7 @@ for (i=0; i<originalFiles.length; i++)
         let originalFile = fs.readFileSync(originalFiles[i]);
         let modifiedFile = fs.readFileSync(editedFiles[i]);
         let difference = modifiedFile.length-originalFile.length;
-
+        let locatedFileID = 0;
         let locatedFileIDs = [];
         for (n=0;n<sizesArch.length;n++)
         {
@@ -132,10 +132,30 @@ for (i=0; i<originalFiles.length; i++)
             }
                     
         }
-        if (filteredFileIDs.length != 1) console.log(filteredFileIDs+ " file either appears in archive twice or doesn't exist")
+        if (filteredFileIDs.length != 1) {
+            for (n=0;n<filteredFileIDs.length;n++)
+            {
+                if (namesArchive[nameIDsArch[filteredFileIDs[n]]] == fileNames[i])
+                {
+                    locatedFileID = filteredFileIDs[n];
+                    console.log(locatedFileID)
+                    archiveFile.writeInt32BE(archiveFile.length, parameterOffsets[locatedFileID]+0x24);
+                    archiveFile.writeInt32BE(archiveFile.readInt32BE(parameterOffsets[locatedFileID]+0x20)+difference, parameterOffsets[locatedFileID]+0x20);
+                    archiveFile = Buffer.concat([
+                        archiveFile,
+                        modifiedFile
+                    ]);
+                    break;
+                }
+            }
+            if (locatedFileID == 0)
+            {
+                console.log("file not found in the archive")
+            }
+        }
         else
         {
-            let locatedFileID = filteredFileIDs[0];
+            locatedFileID = filteredFileIDs[0];
             console.log(locatedFileID)
             archiveFile.writeInt32BE(archiveFile.length, parameterOffsets[locatedFileID]+0x24);
             archiveFile.writeInt32BE(archiveFile.readInt32BE(parameterOffsets[locatedFileID]+0x20)+difference, parameterOffsets[locatedFileID]+0x20);

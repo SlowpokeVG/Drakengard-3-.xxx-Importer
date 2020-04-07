@@ -41,7 +41,7 @@ let fileNames=[];
 let fileSizesOriginal =[];
 let fileSizesModified =[];
 let isModified =[];
-
+if (originalFiles.length != editedFiles.length)  throw ("Amount of files in modded folder has to be the same as original folder");
 for (i=0; i<originalFiles.length; i++)
 {
     if (path.parse(originalFiles[i]).name != path.parse(editedFiles[i]).name) throw ("Files in modified folder should be the same as in original folder");
@@ -113,7 +113,7 @@ for (i=0; i<originalFiles.length; i++)
         {
             if (sizesArch[n] == originalFile.length) locatedFileIDs.push(n);
         }
-        console.log(locatedFileIDs)
+
         let filteredFileIDs = [];
         for (n=0;n<locatedFileIDs.length;n++)
         {
@@ -136,7 +136,7 @@ for (i=0; i<originalFiles.length; i++)
         else
         {
             let locatedFileID = filteredFileIDs[0];
-
+            console.log(locatedFileID)
             archiveFile.writeInt32BE(archiveFile.length, parameterOffsets[locatedFileID]+0x24);
             archiveFile.writeInt32BE(archiveFile.readInt32BE(parameterOffsets[locatedFileID]+0x20)+difference, parameterOffsets[locatedFileID]+0x20);
             archiveFile = Buffer.concat([

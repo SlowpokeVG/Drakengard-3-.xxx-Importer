@@ -18,6 +18,6 @@ Drakengard3Importer.exe CleanFolder ModifiedFolder DecompressedArchive.XXX
 ## Thanks
 
 - [Gildor](https://www.gildor.org/)
-- Andrew McRae
+- [Andrew McRae](https://github.com/fesh0r)
 - Canzah
 - Yoko Taro

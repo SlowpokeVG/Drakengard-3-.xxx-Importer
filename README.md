@@ -8,7 +8,7 @@ Potentially may work with other UE3 UPK archives.
 - Use [Unreal Package Decompressor](https://www.gildor.org/downloads) on an .xxx archive;
 - Extract archive using [Unreal Package Extractor](https://www.gildor.org/downloads);
 - Copy extracted folder and rename it;
-- Make necessary changes to files in a copied folder;
+- Make necessary changes to files in the copied folder;
     - **Amount of files in modded folder has to be the same as original folder** 
 - Use importer like this:
 ```sh
